@@ -1,5 +1,9 @@
 class Event < ApplicationRecord
+  has_many :slots
+  has_many :djs, through: :slots
+
   before_save :fetch_google_place_details
+
 
   def fetch_google_place_details
     return unless google_place_id.present?

@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_06_144509) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_06_172958) do
+  create_table "djs", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "google_place_id"
     t.float "latitude"
@@ -18,6 +24,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_06_144509) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "slots", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "dj_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dj_id"], name: "index_slots_on_dj_id"
+    t.index ["event_id"], name: "index_slots_on_event_id"
   end
 
 end

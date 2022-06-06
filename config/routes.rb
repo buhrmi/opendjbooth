@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :events
-
+  resources :slots
+  
   root 'events#index'
 end

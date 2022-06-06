@@ -11,7 +11,10 @@
   position: relative;
   flex-direction: column;
 }
-
+input {
+  font-size: inherit;
+  
+}
 iframe {
   position: absolute;
   width: 100%;

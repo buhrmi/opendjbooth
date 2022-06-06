@@ -1,6 +1,17 @@
 <script>
+  import { useForm, inertia } from '@inertiajs/inertia-svelte'
   export let event
-  export let timetable = []
+  export let slots = []
+  export let my_slot
+
+  let form = useForm('slot', {
+    event_id: event.id,
+    name: null
+  })
+
+  function createSlot() {
+    $form.post('/slots')
+  }
 </script>
 
 <div class="container">
@@ -8,19 +19,42 @@
     {event.name}
   </h1>
   
-  {#each timetable as settime}
-    {entry.dj.name}
-  {:else}
-    Timetable is empty. Be the first to take over.
-  {/each}
-
+  <ul>
+    {#each slots as slot}
+      <li>
+        {slot.dj.name}
+      </li>
+    {:else}
+      Timetable is empty. Be the first to take over.
+    {/each}
+  </ul>
 </div>
 
 <div class="bottom">
+  {#if my_slot}
+    <p>
+      Woohoo! You're on the list!
+    </p>
+    <a class="btn" href="/slots/{my_slot.id}" use:inertia={{method: 'delete'}}>
+      Remove me
+    </a>
+  {:else}
+    <form on:submit|preventDefault={createSlot}>
+      <p>
+        Would you like to play?
+      </p>
+      <div class="field">
+        <label for="name">
+          Your DJ Name: 
+        </label>
+        <input bind:value={$form.name} />
+      </div>
+      <button class="btn ">
+        Add me to the list
+      </button>
 
-  <div class="btn ">
-    Let me take over
-  </div>
+  </form>
+  {/if}
 </div>
 
 <style>
@@ -29,10 +63,22 @@
     bottom: 0;
     width: 100%;
     background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     padding: 12px;
+    box-shadow: 0 -1px 3px #e0e0e0;
+  }
+  .field {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+    gap: 12px;
+  }
+  p {
+    margin-bottom: 12px;
+  }
+  .field input {
+    flex: 1;
+    padding: 6px;
   }
   .btn {
     align-items: center;
