@@ -12,4 +12,8 @@ class Event < ApplicationRecord
     self.latitude = response.lat
     self.longitude = response.lng
   end
+
+  def broadcast_slots
+    EventChannel.broadcast_to(self, {slots: slots.as_json(include: :dj)})
+  end
 end

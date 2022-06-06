@@ -13,7 +13,9 @@
 }
 input {
   font-size: inherit;
-  
+}
+.error {
+  color: #a94442;
 }
 iframe {
   position: absolute;

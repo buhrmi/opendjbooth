@@ -1,6 +1,9 @@
 class SlotsController < ApplicationController
   def create
-    unless @current_dj
+    if current_dj
+      current_dj.name = params[:name]
+      current_dj.save!
+    else
       @current_dj = Dj.create!(name: params[:name])
       session[:dj_id] = @current_dj.id
     end

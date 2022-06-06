@@ -1,8 +1,21 @@
 <script>
   import { useForm, inertia } from '@inertiajs/inertia-svelte'
+  import { onMount } from 'svelte';
+  import consumer from '~/lib/consumer';
   export let event
   export let slots = []
-  export let my_slot
+  export let current_dj
+
+  $: mySlot = slots.find(slot => slot.dj_id === current_dj.id)
+  
+  onMount(function() {
+    consumer.subscriptions.create({ channel: "EventChannel", id: event.id }, {
+      received(data) {
+        //event = data.event
+        slots = data.slots
+      }
+    })
+  })
 
   let form = useForm('slot', {
     event_id: event.id,
@@ -18,6 +31,8 @@
   <h1>
     {event.name}
   </h1>
+
+
   
   <ul>
     {#each slots as slot}
@@ -31,11 +46,11 @@
 </div>
 
 <div class="bottom">
-  {#if my_slot}
+  {#if mySlot}
     <p>
       Woohoo! You're on the list!
     </p>
-    <a class="btn" href="/slots/{my_slot.id}" use:inertia={{method: 'delete'}}>
+    <a class="btn" href="/slots/{mySlot.id}" use:inertia={{method: 'delete'}}>
       Remove me
     </a>
   {:else}
@@ -49,6 +64,13 @@
         </label>
         <input bind:value={$form.name} />
       </div>
+      {#if $form.errors.name}
+        <p class="error">
+          
+            {$form.errors.name[0]}
+          
+        </p>
+      {/if}
       <button class="btn ">
         Add me to the list
       </button>

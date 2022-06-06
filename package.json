@@ -3,6 +3,7 @@
     "@inertiajs/inertia": "^0.11.0",
     "@inertiajs/inertia-svelte": "^0.8.0",
     "@inertiajs/progress": "^0.2.7",
+    "@rails/actioncable": "^6.0.5",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.47",
     "axios": "^0.27.2",
     "svelte": "^3.48.0",
