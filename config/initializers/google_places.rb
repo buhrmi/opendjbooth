@@ -1,0 +1,1 @@
+PLACES = GooglePlaces::Client.new Rails.application.credentials.google_maps_api_key

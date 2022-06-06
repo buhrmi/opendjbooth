@@ -1,0 +1,22 @@
+* {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#app {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+
+iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.container {
+  padding: 12px;
+}
