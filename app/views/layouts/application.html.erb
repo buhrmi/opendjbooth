@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <% if @title %>
       <title><%= @title %></title>
     <% else %>
       <title>Open DJ Booth</title>
+      <meta name="twitter:title" content="Open DJ Booth">
     <% end %>
+
     <% if @description %>
       <meta name="description" content="<%= @description %>" />
+      <meta name="twitter:description" content="<%= @description %>" />
     <% end %>
     
     <% if @image %>
       <meta property="og:image" content="<%= @image %>" />
+      <meta name="twitter:image" content="<%= @image %>" />
+
     <% else %>
       <meta property="og:image" content="https://www.opendjbooth.com/share.png" />
+      <meta name="twitter:image" content="https://www.opendjbooth.com/share.png" />
     <% end %>
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@OpenDJBooth">
+    <meta name="twitter:creator" content="@OpenDJBooth">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400;900&display=swap" rel="stylesheet">
+    
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
