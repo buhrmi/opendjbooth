@@ -9,11 +9,11 @@
   let form = useForm('slot', {
     event_id: event.id,
     name: null,
-    coords: {}
+    coords: null
   })
 
   $: mySlot = current_dj && slots.find(slot => slot.dj_id === current_dj.id)
-
+  
   let sub
   onMount(function() {
     sub = consumer.subscriptions.create({ channel: "EventChannel", id: event.id }, {
@@ -28,22 +28,65 @@
     sub.unsubscribe()
   })
 
+  function getPosition(options) {
+    return new Promise((resolve, reject) => 
+        navigator.geolocation.getCurrentPosition(resolve, reject, options)
+    );
+  }
+
+
   function formatTime(time) {
     time = new Date(time)
     return time.getHours() + ':' + time.getMinutes()
   }
 
-
+  let gettingPosition
+  let working
   async function createSlot() {
-    const position = await getPosition()
-    $form.coords = position.coords
-    $form.post('/slots')
+    working = true
+    $form.clearErrors()
+
+    try {
+      setTimeout(() => { if (!$form.coords) gettingPosition = true }, 500)
+      const position = await getPosition()
+      gettingPosition = false
+      
+      $form.coords = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      }
+      $form.post('/slots')
+      working = false
+    }
+    catch(e) {
+      console.error(e)
+      // try again
+      setTimeout(createSlot, 1000)
+    }
+    
+  }
+  function formatDate(time) {
+    let date = new Date(time)
+    let dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    let monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    return dayNames[date.getDay()] + ', ' + monthNames[date.getMonth()]+ date.getDate() + ' '
   }
 </script>
 
+{#if gettingPosition}
+  <div class="overlay">
+    <div class="modal">
+      To prevent spam, we need to know if you're near the booth. Please allow location access.
+    </div>
+  </div>
+{/if}
+
 <div class="container">
   <h1>
-    {event.name}
+    {event.name} <br>
+    <span>
+      {formatDate(event.start_at)}
+    </span>
   </h1>
 
   
@@ -87,7 +130,7 @@
           {$form.errors.name[0]}
         </p>
       {/if}
-      <button class="btn ">
+      <button class:disabled={working} class="btn">
         Add me to the list
       </button>
 
@@ -96,6 +139,31 @@
 </div>
 
 <style>
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 10;
+  }
+  h1 span {
+    font-size: 0.7em;
+    font-weight: normal;
+    color:rgba(58, 65, 111, .5);
+  }
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 300px;
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
   .timetable li {
     margin: 12px 0;
     padding: 12px;
@@ -158,6 +226,9 @@
     will-change: box-shadow,transform;
     font-size: 18px;
     width: 100%;
+  }
+  .btn.disabled {
+    opacity: 0.5;
   }
 
   .btn:focus {
