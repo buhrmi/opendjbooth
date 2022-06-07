@@ -7,4 +7,4 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-apollowiese = Event.where(google_place_id: 'ChIJLzRoaxHKuEcRXRsWTQmBRf8').first_or_create(start_at: Time.parse('June 10, 4pm CEST'))
+apollowiese = Event.where(google_place_id: 'ChIJLzRoaxHKuEcRXRsWTQmBRf8').first_or_create(start_at: Time.parse('June 10, 4pm +0200'))

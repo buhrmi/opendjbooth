@@ -37,7 +37,8 @@
 
   function formatTime(time) {
     time = new Date(time)
-    return time.getHours() + ':' + time.getMinutes()
+    let minutesWithLeadingZero = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()
+    return time.getHours() + ':' + minutesWithLeadingZero
   }
 
   let gettingPosition
