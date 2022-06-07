@@ -124,14 +124,14 @@
         <label for="name">
           Your DJ Name: 
         </label>
-        <input bind:value={$form.name} />
+        <input name="name" bind:value={$form.name} />
       </div>
       {#if $form.errors.name}
         <p class="error">
           {$form.errors.name[0]}
         </p>
       {/if}
-      <button class:disabled={working} class="btn">
+      <button name="add" class:disabled={working} class="btn">
         Add me to the list
       </button>
 

@@ -120,6 +120,8 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     minitest (5.15.0)
+    minitest-ci (3.4.0)
+      minitest (>= 5.0.6)
     msgpack (1.5.2)
     multi_xml (0.6.0)
     net-imap (0.2.3)
@@ -227,6 +229,7 @@ DEPENDENCIES
   google_places
   inertia_rails (~> 1.12)
   jbuilder
+  minitest-ci
   pg
   puma (~> 5.0)
   rails (~> 7.0.2, >= 7.0.2.4)
