@@ -70,7 +70,7 @@
     let date = new Date(time)
     let dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     let monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    return dayNames[date.getDay()] + ', ' + monthNames[date.getMonth()]+ date.getDate() + ' '
+    return dayNames[date.getDay()] + ', ' + monthNames[date.getMonth()] + ' ' + date.getDate() + ' '
   }
 </script>
 
