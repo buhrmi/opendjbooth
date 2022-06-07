@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def show
     event = Event.find(params[:id])
-    @title = event.name + ' Time Table'
+    @title = event.name + ' Lineup'
     
     @description = event.start_at.strftime('%A, %B %e, %Y')
     
