@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
   end
 
   def current_dj
-    @current_dj ||= Dj.find(session[:dj_id]) if session[:dj_id]
+    @current_dj ||= Dj.find_by(id: session[:dj_id]) if session[:dj_id]
   end
 end

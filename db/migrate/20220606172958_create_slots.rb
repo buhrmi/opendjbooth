@@ -3,7 +3,7 @@ class CreateSlots < ActiveRecord::Migration[7.0]
     create_table :slots do |t|
       t.integer :event_id
       t.integer :dj_id
-
+      t.timestamp :start_at
       t.timestamps
     end
     add_index :slots, :event_id

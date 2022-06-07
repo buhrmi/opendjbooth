@@ -8,9 +8,10 @@ class SlotsController < ApplicationController
       session[:dj_id] = @current_dj.id
     end
 
-    slot = Slot.create!(slot_params.merge(dj_id: @current_dj.id))
-    slot.save!
-    redirect_to event_path(slot.event)
+    event = Event.find(params[:event_id])
+    event.add_dj!(current_dj)
+    
+    redirect_to event_path(event)
   end
 
 

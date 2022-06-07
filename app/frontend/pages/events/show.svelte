@@ -6,7 +6,7 @@
   export let slots = []
   export let current_dj
 
-  $: mySlot = slots.find(slot => slot.dj_id === current_dj.id)
+  $: mySlot = current_dj && slots.find(slot => slot.dj_id === current_dj.id)
   
   onMount(function() {
     consumer.subscriptions.create({ channel: "EventChannel", id: event.id }, {
@@ -16,6 +16,11 @@
       }
     })
   })
+
+  function formatTime(time) {
+    time = new Date(time)
+    return time.getHours() + ':' + time.getMinutes()
+  }
 
   let form = useForm('slot', {
     event_id: event.id,
@@ -32,12 +37,16 @@
     {event.name}
   </h1>
 
-
   
-  <ul>
+  <ul class="timetable">
     {#each slots as slot}
-      <li>
-        {slot.dj.name}
+      <li class:me={slot.dj_id == current_dj?.id}>
+        <div class="time">
+          {formatTime(slot.start_at)}
+        </div>
+        <div class="name">
+          {slot.dj.name}
+        </div>
       </li>
     {:else}
       Timetable is empty. Be the first to take over.
@@ -48,7 +57,7 @@
 <div class="bottom">
   {#if mySlot}
     <p>
-      Woohoo! You're on the list!
+      Woohoo! You're on the list! Your time is <b>{formatTime(mySlot.start_at)}</b>.
     </p>
     <a class="btn" href="/slots/{mySlot.id}" use:inertia={{method: 'delete'}}>
       Remove me
@@ -66,9 +75,7 @@
       </div>
       {#if $form.errors.name}
         <p class="error">
-          
-            {$form.errors.name[0]}
-          
+          {$form.errors.name[0]}
         </p>
       {/if}
       <button class="btn ">
@@ -80,6 +87,18 @@
 </div>
 
 <style>
+  .timetable li {
+    margin: 12px 0;
+    padding: 12px;
+    border: 1px solid #eee;
+  }
+  .timetable .name {
+    font-weight: bold;
+    font-size: 1.2em;
+  }
+  .timetable .me {
+    background-color: rgb(255, 254, 203);
+  }
   .bottom {
     position: absolute;
     bottom: 0;
