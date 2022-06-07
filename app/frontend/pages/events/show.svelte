@@ -1,15 +1,22 @@
 <script>
   import { useForm, inertia } from '@inertiajs/inertia-svelte'
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import consumer from '~/lib/consumer';
   export let event
   export let slots = []
   export let current_dj
 
+  let form = useForm('slot', {
+    event_id: event.id,
+    name: null,
+    coords: {}
+  })
+
   $: mySlot = current_dj && slots.find(slot => slot.dj_id === current_dj.id)
-  
+
+  let sub
   onMount(function() {
-    consumer.subscriptions.create({ channel: "EventChannel", id: event.id }, {
+    sub = consumer.subscriptions.create({ channel: "EventChannel", id: event.id }, {
       received(data) {
         //event = data.event
         slots = data.slots
@@ -17,17 +24,19 @@
     })
   })
 
+  onDestroy(function() {
+    sub.unsubscribe()
+  })
+
   function formatTime(time) {
     time = new Date(time)
     return time.getHours() + ':' + time.getMinutes()
   }
 
-  let form = useForm('slot', {
-    event_id: event.id,
-    name: null
-  })
 
-  function createSlot() {
+  async function createSlot() {
+    const position = await getPosition()
+    $form.coords = position.coords
     $form.post('/slots')
   }
 </script>

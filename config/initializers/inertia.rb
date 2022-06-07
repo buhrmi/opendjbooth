@@ -1,5 +1,3 @@
 InertiaRails.configure do |config|
-  config.version = lambda do 
-    ENV['HEROKU_RELEASE_VERSION']
-  end
+  config.version = ENV['HEROKU_RELEASE_VERSION']
 end
