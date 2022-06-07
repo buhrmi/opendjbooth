@@ -84,11 +84,11 @@
 
 <div class="container">
   <h1>
-    {event.name} <br>
-    <span>
-      {formatDate(event.start_at)}
-    </span>
+    {event.name}
   </h1>
+  <div class="description">
+    {formatDate(event.start_at)} | Featuring free drinks for all DJs
+  </div>
 
   
   <ul class="timetable">
@@ -149,10 +149,9 @@
     background: rgba(0,0,0,0.5);
     z-index: 10;
   }
-  h1 span {
-    font-size: 0.7em;
-    font-weight: normal;
-    color:rgba(58, 65, 111, .5);
+  .description {
+    font-size: 1.3em;
+    color:rgba(48, 52, 78, 0.692);
   }
   .modal {
     position: absolute;
