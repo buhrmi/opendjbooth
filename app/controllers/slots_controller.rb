@@ -1,17 +1,19 @@
 class SlotsController < ApplicationController
   def create
+    event = Event.find(params[:event_id])
+    meters = distance([params[:coords][:lat].to_f, params[:coords][:lng].to_f], [event.latitude, event.longitude])
+    
+    if meters > 1500
+      flash[:error] = "You are too far away from the event. You are #{meters.round} meters away."
+      return redirect_to event_path(event)  
+    end
+
     if current_dj
       current_dj.name = params[:name]
       current_dj.save!
     else
       @current_dj = Dj.create!(name: params[:name])
       session[:dj_id] = @current_dj.id
-    end
-    event = Event.find(params[:event_id])
-    meters = distance([params[:coords][:lat].to_f, params[:coords][:lng].to_f], [event.latitude, event.longitude])
-    
-    if meters > 50
-      # throw error if more than 50 meters away from booth
     end
     
     event.add_dj!(current_dj)

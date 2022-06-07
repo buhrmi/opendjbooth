@@ -77,7 +77,7 @@
 {#if gettingPosition}
   <div class="overlay">
     <div class="modal">
-      To prevent spam, we need to know if you're near the booth. Please allow location access.
+      Before adding yourself to the list, we'd like to make sure that you're actually close to the booth. Please allow location access.
     </div>
   </div>
 {/if}

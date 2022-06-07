@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Open DJ Booth</title>
+    <% if @title %>
+      <title><%= @title %></title>
+    <% else %>
+      <title>Open DJ Booth</title>
+    <% end %>
+    <% if @description %>
+      <meta name="description" content="<%= @description %>" />
+    <% end %>
+    
+    <% if @image %>
+      <meta property="og:image" content="<%= @image %>" />
+    <% else %>
+      <meta property="og:image" content="https://www.opendjbooth.com/share.png" />
+    <% end %>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400;900&display=swap" rel="stylesheet">
