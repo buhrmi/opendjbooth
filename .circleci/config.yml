@@ -54,7 +54,7 @@ jobs:
       #- run: cp .sample.env .env
 
       # Setup the database
-      - run: bundle exec rake db:setup
+      - run: bundle exec rake db:create db:schema:load
 
       # Run the tests
       - run: bundle exec rake test:system test
