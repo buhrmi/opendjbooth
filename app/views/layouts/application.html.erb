@@ -3,12 +3,15 @@
   <head>
     <% if @title %>
       <title><%= @title %></title>
+      <meta name="twitter:title" content="<%= @title %>">
     <% else %>
       <title>Open DJ Booth</title>
+      <meta name="twitter:title" content="Open DJ Booth">
     <% end %>
 
     <% if @description %>
       <meta name="description" content="<%= @description %>" />
+      <meta name="twitter:description" content="<%= @description %>" />
     <% end %>
     
     <% if @image %>
