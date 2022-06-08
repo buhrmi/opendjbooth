@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import Layout from '../components/_layout.svelte'
 
+import { Inertia } from '@inertiajs/inertia'
 import { createInertiaApp } from '@inertiajs/inertia-svelte'
 import { InertiaProgress } from '@inertiajs/progress'
 

@@ -32,12 +32,12 @@ class SessionsController < ApplicationController
       unless identity.provider_info['email']
         raise ActionController::BadRequest.new("Sorry, this #{provider.capitalize} account has no verified email address.")
       end
-      name = identity.provider_info['nickname'] || identity.provider_info['username'] || identity.provider_info['name']
+      name = identity.provider_info['name'] || identity.provider_info['nickname'] || identity.provider_info['username']
       identity.dj = Dj.create!(email: identity.provider_info['email'], name: name)
     end
     identity.save!
     session[:dj_id] = identity.dj.id
-    flash[:notice] = "Your #{provider.capitalize} has been linked"
+    # flash[:notice] = "Your #{provider.capitalize} has been linked"
   end
 
   # def create_from_email

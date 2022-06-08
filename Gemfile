@@ -22,10 +22,12 @@ gem "redis", "~> 4.0"
 # gem "bcrypt", "~> 3.1.7"
 
 gem "inertia_rails", "~> 1.12"
-
 gem "vite_rails", "~> 3.0"
-
 gem 'google_places'
+
+gem 'omniauth'
+gem "omniauth-rails_csrf_protection"
+gem 'omniauth-twitter'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]

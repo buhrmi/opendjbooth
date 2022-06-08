@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   resources :events
   resources :slots
+  resource :session
   
+  get '/auth/:provider/callback', to: 'sessions#create'
+
   root 'events#index'
 end

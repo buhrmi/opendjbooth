@@ -2,16 +2,18 @@
   import { useForm, inertia } from '@inertiajs/inertia-svelte'
   import { onDestroy, onMount } from 'svelte';
   import consumer from '~/lib/consumer';
+  import link_accounts from '~/lib/link_accounts';
   export let event
   export let slots = []
   export let current_dj
 
-  let form = useForm('slot', {
+  let form = useForm({
     event_id: event.id,
-    name: null,
+    name: current_dj?.name,
     coords: null
   })
 
+  $: $form.name = current_dj?.name
   $: mySlot = current_dj && slots.find(slot => slot.dj_id === current_dj.id)
   
   let sub
@@ -110,7 +112,7 @@
 <div class="bottom">
   {#if mySlot}
     <p>
-      Woohoo! You're on the list! Your time is <b>{formatTime(mySlot.start_at)}</b>.
+      Woohoo! You're in the lineup! Your time is <b>{formatTime(mySlot.start_at)}</b>.
     </p>
     <a class="btn" href="/slots/{mySlot.id}" use:inertia={{method: 'delete'}}>
       Remove me
@@ -125,6 +127,12 @@
           Your DJ Name: 
         </label>
         <input name="name" bind:value={$form.name} />
+        {#if current_dj?.socials.twitter}
+          Connected to Twitter
+        {:else}
+          or 
+          <a on:click|preventDefault={() => link_accounts('twitter')} href="/session/new?provider=twitter">connect with Twitter</a>
+        {/if}
       </div>
       {#if $form.errors.name}
         <p class="error">
@@ -132,7 +140,7 @@
         </p>
       {/if}
       <button name="add" class:disabled={working} class="btn">
-        Add me to the list
+        Add me to the lineup
       </button>
 
   </form>
