@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
 
   inertia_share do
     {
-      current_dj: current_dj.try(:as_json, methods: :socials),
+      current_dj: current_dj.try(:as_json, methods: :twitter_name),
       errors: session.delete(:errors),
       flash: flash.to_h
     }

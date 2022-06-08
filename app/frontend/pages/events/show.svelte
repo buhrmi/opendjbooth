@@ -100,8 +100,8 @@
           {formatTime(slot.start_at)}
         </div>
         <div class="name">
-          {#if slot.dj.socials.twitter}
-            <a target="_blank" href="https://twitter.com/{slot.dj.socials.twitter.username}">
+          {#if slot.dj.twitter_name}
+            <a target="_blank" href="https://twitter.com/{slot.dj.twitter_name}">
               {slot.dj.name}
             </a>
           {:else}
@@ -133,7 +133,7 @@
           Your DJ Name: 
         </label>
         <input name="name" bind:value={$form.name} />
-        {#if current_dj?.socials.twitter}
+        {#if current_dj?.twitter_name}
           Connected to Twitter
         {:else}
           or 

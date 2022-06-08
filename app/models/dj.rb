@@ -8,12 +8,13 @@ class Dj < ApplicationRecord
   def socials
     result = {}
     identities.each do |i|
-      result[i.provider] = {
-        username: i.provider_info['username'] || i.provider_info['nickname'],
-        name: i.provider_info['name']
-      }
+      result[i.provider] = i.provider_info['username'] || i.provider_info['nickname']
     end
     result
+  end
+
+  def twitter_name
+    socials['twitter']
   end
 
 end
