@@ -87,7 +87,7 @@
     {event.name}
   </h1>
   <div class="description">
-    {formatDate(event.start_at)} | Featuring free drinks for all DJs
+    {formatDate(event.start_at)}
   </div>
 
   

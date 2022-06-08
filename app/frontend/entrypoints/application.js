@@ -5,7 +5,7 @@ import Layout from '../components/_layout.svelte'
 import { createInertiaApp } from '@inertiajs/inertia-svelte'
 import { InertiaProgress } from '@inertiajs/progress'
 
-import 'uno.css'
+import 'virtual:uno.css'
 import './global.css'
 
 const pages = import.meta.glob('../pages/**/*.svelte')
@@ -23,4 +23,9 @@ createInertiaApp({
   setup({ el, App, props }) {
     new App({ target: el, props })
   },
+})
+
+// Reload after logged in
+window.addEventListener('message', function(event) {
+  if (event.data == 'logged_in') Inertia.reload()
 })
