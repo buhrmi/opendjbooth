@@ -5,8 +5,10 @@
     "@inertiajs/progress": "^0.2.7",
     "@rails/actioncable": "^6.0.5",
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.47",
+    "@unocss/preset-icons": "^0.38.1",
     "axios": "^0.27.2",
     "svelte": "^3.48.0",
+    "svelte-preprocess-import-assets": "^0.1.6",
     "unocss": "^0.37.4",
     "vite": "^2.9.9",
     "vite-plugin-ruby": "^3.0.12"

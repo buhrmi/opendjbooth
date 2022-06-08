@@ -30,5 +30,8 @@ iframe {
   border-color: #ebccd1;
 }
 .container {
-  padding: 12px;
+  padding: 18px;
+}
+li {
+  list-style: none;
 }

@@ -128,15 +128,17 @@
       <p>
         Would you like to play?
       </p>
-      <div class="field">
-        <label for="name">
-          Your DJ Name: 
-        </label>
-        <input name="name" bind:value={$form.name} />
+      <div class="row">
+        <div class="field">
+          <label for="name">
+            Your DJ Name: 
+          </label>
+          <input name="name" bind:value={$form.name} />
+        </div>
         {#if current_dj?.twitter_name}
           Connected to Twitter
         {:else}
-          or 
+          <div>or</div>
           <a on:click|preventDefault={() => link_accounts('twitter')} href="/session/new?provider=twitter">connect with Twitter</a>
         {/if}
       </div>
@@ -195,22 +197,23 @@
     bottom: 0;
     width: 100%;
     background: #fff;
-    padding: 12px;
+    padding: 18px;
     box-shadow: 0 -1px 3px #e0e0e0;
   }
-  .field {
+  .row {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    /* justify-content: space-between; */
+    align-items: center;
     margin-bottom: 12px;
-    gap: 12px;
+    gap: 8px;
   }
   p {
     margin-bottom: 12px;
   }
-  .field input {
+  input {
     flex: 1;
     padding: 6px;
+    width: 100%;
   }
   .btn {
     align-items: center;
