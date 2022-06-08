@@ -100,7 +100,13 @@
           {formatTime(slot.start_at)}
         </div>
         <div class="name">
-          {slot.dj.name}
+          {#if slot.dj.socials.twitter}
+            <a target="_blank" href="https://twitter.com/{slot.dj.socials.twitter.username}">
+              {slot.dj.name}
+            </a>
+          {:else}
+            {slot.dj.name}
+          {/if}
         </div>
       </li>
     {:else}
