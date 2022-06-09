@@ -14,7 +14,7 @@ class Event < ApplicationRecord
 
   def add_dj!(dj)
     # TODO: reuse a slot where DJ is nil
-    slots.create!(dj: dj, start_at: next_empty_time)
+    slots.create!(dj: dj, start_at: [next_empty_time,Time.now].max)
   end
 
   def fetch_google_place_details
