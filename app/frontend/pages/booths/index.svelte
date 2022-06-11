@@ -1,6 +1,7 @@
 <script>
   export let booths
   import { inertia } from '@inertiajs/inertia-svelte'
+
 </script>
 
 <div class="container">
@@ -11,13 +12,16 @@
 
   <ol>
     <li>
-      Prepare your USB stick with Rekordbox
+      1. Prepare your USB stick with Rekordbox
     </li>
     <li>
-      Find a DJ booth
+      2. Find a DJ booth
     </li>
     <li>
-      Add yourself to the lineup
+      3. Add yourself to the lineup
+    </li>
+    <li>
+      4. Join us on <a href="https://twitch.tv/opendjbooth" target="_blank">Twitch</a>
     </li>
   </ol>
 
