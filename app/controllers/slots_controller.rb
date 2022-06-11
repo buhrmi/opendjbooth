@@ -5,7 +5,7 @@ class SlotsController < ApplicationController
     
     if meters > 1500
       flash[:error] = "You are too far away from the booth. You are #{meters.round} meters away."
-      return redirect_to event_path(booth)  
+      return redirect_back(fallback_location: booth_path(booth, date: slot.start_at.strftime('%Y-%m-%d')))
     end
 
     if current_dj
