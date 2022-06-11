@@ -1,7 +1,0 @@
-
-one: 
-  id: 1
-  start_at: <%= Time.now %>
-  name: Whoopsidoopsie
-  longitude: 20
-  latitude: 20

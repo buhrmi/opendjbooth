@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_08_070646) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_11_100310) do
+  create_table "booths", force: :cascade do |t|
+    t.string "google_place_id"
+    t.string "name"
+    t.string "timezone"
+    t.float "longitude"
+    t.float "latitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "djs", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -20,13 +30,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_070646) do
   end
 
   create_table "events", force: :cascade do |t|
-    t.string "google_place_id"
     t.datetime "start_at", precision: nil
-    t.float "latitude"
-    t.float "longitude"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "booth_id"
   end
 
   create_table "identities", force: :cascade do |t|
@@ -41,13 +49,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_08_070646) do
   end
 
   create_table "slots", force: :cascade do |t|
-    t.integer "event_id"
     t.integer "dj_id"
     t.datetime "start_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "booth_id"
     t.index ["dj_id"], name: "index_slots_on_dj_id"
-    t.index ["event_id"], name: "index_slots_on_event_id"
   end
 
 end

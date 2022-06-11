@@ -3,12 +3,14 @@
   import { onDestroy, onMount } from 'svelte';
   import consumer from '~/lib/consumer';
   import link_accounts from '~/lib/link_accounts';
-  export let event
+  export let booth
   export let slots = []
   export let current_dj
+  export let date
 
   let form = useForm({
-    event_id: event.id,
+    booth_id: booth.id,
+    date: date,
     name: current_dj?.name,
     coords: null
   })
@@ -18,7 +20,7 @@
   
   let sub
   onMount(function() {
-    sub = consumer.subscriptions.create({ channel: "EventChannel", id: event.id }, {
+    sub = consumer.subscriptions.create({ channel: "Boothhannel", id: booth.id }, {
       received(data) {
         //event = data.event
         slots = data.slots
@@ -86,10 +88,10 @@
 
 <div class="container">
   <h1>
-    {event.name}
+    {booth.name}
   </h1>
   <div class="description">
-    {formatDate(event.start_at)}
+    {formatDate(date)}
   </div>
 
   
@@ -119,6 +121,9 @@
   {#if mySlot}
     <p>
       Woohoo! You're in the lineup! Your time is <b>{formatTime(mySlot.start_at)}</b>.
+      {#if !current_dj?.twitter_name}
+        <a on:click|preventDefault={() => link_accounts('twitter')} href="/session/new?provider=twitter">Connect your Twitter account</a>
+      {/if}
     </p>
     <a class="btn" href="/slots/{mySlot.id}" use:inertia={{method: 'delete'}}>
       Remove me
@@ -131,7 +136,7 @@
       <div class="row">
         <div class="field">
           <label for="name">
-            Your DJ Name: 
+            Your Artist Name: 
           </label>
           <input name="name" bind:value={$form.name} />
         </div>

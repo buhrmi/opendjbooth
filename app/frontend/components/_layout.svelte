@@ -6,13 +6,7 @@
 <nav>
   <a use:inertia href="/">
     <img class="logo" src="~/images/logo.png" alt="Open DJ Booth">
-  </a>
-  <ul>
-    <li>
-      <a use:inertia href="/events/1">June 10, 4pm @ Apollowiese</a>
-      
-    </li>
-  </ul>
+  </a> 
 </nav>
 
 {#if flash.error}

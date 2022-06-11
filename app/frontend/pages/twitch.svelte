@@ -9,10 +9,4 @@
   })
 </script>
 
-<div id="twitch-embed" class="relative flex-1">
-  
-</div>
-
-<style>
-
-</style>
+<div id="twitch-embed" class="relative flex-1" />

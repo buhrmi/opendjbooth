@@ -1,18 +1,6 @@
 class EventsController < ApplicationController
   def show
     event = Event.find(params[:id])
-    @title = event.name + ' timetable'
-    
-    @description = event.start_at.strftime('%A, %B %e, %Y')
-    
-    render inertia: 'events/show', props: {
-      event: event,
-      slots: event.slots.as_json(Slot::PUBLIC_OPTIONS)
-    }
+    redirect_to booth_path(event.booth, date: event.start_at.strftime('%Y-%m-%d'))
   end
-
-  def index
-    render inertia: 'events/index'
-  end
-
 end

@@ -3,10 +3,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :events
+  resources :booths
   resources :slots
   resource :session
   
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  root 'events#index'
+  root 'booths#index'
 end

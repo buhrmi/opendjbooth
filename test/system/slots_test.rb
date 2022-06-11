@@ -3,12 +3,12 @@ require "application_system_test_case"
 class SlotsTest < ApplicationSystemTestCase
 
   test "a visitor can create a slot for himself if he's close" do
-    event = Event.find(1)
+    booth = Booth.find(1)
     
-    visit "/events/1"
+    visit "/booths/1"
 
     # mock the user's location
-    page.execute_script "navigator.geolocation.getCurrentPosition = function(success) { success({coords: {latitude: #{event.latitude}, longitude: #{event.longitude}}}); }"
+    page.execute_script "navigator.geolocation.getCurrentPosition = function(success) { success({coords: {latitude: #{booth.latitude}, longitude: #{booth.longitude}}}); }"
     
     # make sure a slot record is  created
     assert_difference('Slot.count', 1) do

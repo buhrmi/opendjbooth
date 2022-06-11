@@ -1,11 +1,11 @@
 class SlotsController < ApplicationController
   def create
-    event = Event.find(params[:event_id])
-    meters = distance([params[:coords][:lat].to_f, params[:coords][:lng].to_f], [event.latitude, event.longitude])
+    booth = Booth.find(params[:booth_id])
+    meters = distance([params[:coords][:lat].to_f, params[:coords][:lng].to_f], [booth.latitude, booth.longitude])
     
     if meters > 1500
-      flash[:error] = "You are too far away from the event. You are #{meters.round} meters away."
-      return redirect_to event_path(event)  
+      flash[:error] = "You are too far away from the booth. You are #{meters.round} meters away."
+      return redirect_to event_path(booth)  
     end
 
     if current_dj
@@ -16,16 +16,18 @@ class SlotsController < ApplicationController
       session[:dj_id] = @current_dj.id
     end
     
-    event.add_dj!(current_dj)
+    preferred_time = Time.parse("#{params[:date]} #{params[:time]}")
+
+    slot = booth.add_dj!(current_dj, preferred_time)
     
-    redirect_to event_path(event)
+    redirect_back(fallback_location: booth_path(booth, date: slot.start_at.strftime('%Y-%m-%d')))
   end
 
 
   def destroy
     slot = current_dj.slots.find(params[:id])
     slot.destroy
-    redirect_to event_path(slot.event)
+    redirect_back(fallback_location: booth_path(slot.booth, date: slot.start_at.strftime('%Y-%m-%d')))
   end
 
   private
