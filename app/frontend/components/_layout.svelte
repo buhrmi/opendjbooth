@@ -5,7 +5,7 @@
 
 <nav>
   <a use:inertia href="/">
-    <img class="logo" src="~/images/logo.png" alt="Open DJ Booth">
+    <img class="logo" src="~/images/logo.png" alt="Open DJ Place">
   </a> 
 </nav>
 

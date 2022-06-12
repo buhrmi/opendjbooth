@@ -1,26 +1,26 @@
-class BoothsController < ApplicationController
+class PlacesController < ApplicationController
   def show
-    booth = Booth.find(params[:id])
+    place = Place.find(params[:id])
     if params[:date]
       date = Time.parse(params[:date])
     else
       date = Time.now.beginning_of_day
     end
       
-    slots = booth.slots.on_day(date)
+    slots = place.slots.on_day(date)
     
     @description = date.strftime('%A, %B %e, %Y')
     
-    render inertia: 'booths/show', props: {
-      booth: booth,
+    render inertia: 'places/show', props: {
+      place: place,
       date: date,
       slots: slots.as_json(Slot::PUBLIC_OPTIONS)
     }
   end
 
   def index
-    render inertia: 'booths/index', props: {
-      booths: Booth.all
+    render inertia: 'places/index', props: {
+      places: Place.all
     }
   end
 

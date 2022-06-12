@@ -1,10 +1,10 @@
 class SlotsController < ApplicationController
   def create
-    booth = Booth.find(params[:booth_id])
-    meters = distance([params[:coords][:lat].to_f, params[:coords][:lng].to_f], [booth.latitude, booth.longitude])
+    place = Place.find(params[:place_id])
+    meters = distance([params[:coords][:lat].to_f, params[:coords][:lng].to_f], [place.latitude, place.longitude])
     
     if meters > 1500
-      flash[:error] = "You are too far away from the booth. You are #{meters.round} meters away."
+      flash[:error] = "You are too far away from the place. You are #{meters.round} meters away."
       return redirect_back(fallback_location: root_url)
     end
 
@@ -18,7 +18,7 @@ class SlotsController < ApplicationController
     
     preferred_time = Time.parse("#{params[:date]} #{params[:time]}")
 
-    slot = booth.add_dj!(current_dj, preferred_time)
+    slot = place.add_dj!(current_dj, preferred_time)
     
     redirect_back(fallback_location: root_url)
   end

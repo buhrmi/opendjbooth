@@ -2,9 +2,9 @@ class Event < ApplicationRecord
   has_many :slots, through: :event
   has_many :djs, through: :slots
 
-  belongs_to :booth
+  belongs_to :place
 
   def name
-    attributes[:name] || booth.name
+    attributes[:name] || place.name
   end
 end

@@ -7,4 +7,4 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 
-apollowiese = Booth.where(google_place_id: 'ChIJLzRoaxHKuEcRXRsWTQmBRf8').first_or_create!
+apollowiese = Place.where(google_place_id: 'ChIJLzRoaxHKuEcRXRsWTQmBRf8').first_or_create!

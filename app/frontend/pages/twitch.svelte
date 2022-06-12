@@ -4,7 +4,7 @@
 
   onMount(function() {
     new Twitch.Embed("twitch-embed", {
-      channel: "opendjbooth"
+      channel: "opendjplace"
     })
   })
 </script>

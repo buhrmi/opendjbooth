@@ -3,13 +3,13 @@
   import { onDestroy, onMount } from 'svelte';
   import consumer from '~/lib/consumer';
   import link_accounts from '~/lib/link_accounts';
-  export let booth
+  export let place
   export let slots = []
   export let current_dj
   export let date
 
   let form = useForm({
-    booth_id: booth.id,
+    place_id: place.id,
     date: date,
     name: current_dj?.name,
     coords: null
@@ -20,7 +20,7 @@
   
   let sub
   onMount(function() {
-    sub = consumer.subscriptions.create({ channel: "Boothhannel", id: booth.id }, {
+    sub = consumer.subscriptions.create({ channel: "Placehannel", id: place.id }, {
       received(data) {
         //event = data.event
         slots = data.slots
@@ -81,14 +81,14 @@
 {#if gettingPosition}
   <div class="overlay">
     <div class="modal">
-      Before adding yourself to the list, we'd like to make sure that you're actually close to the booth. Please allow location access.
+      Before adding yourself to the list, we'd like to make sure that you're actually close to the place. Please allow location access.
     </div>
   </div>
 {/if}
 
 <div class="container">
   <h1>
-    {booth.name}
+    {place.name}
   </h1>
   <div class="description">
     {formatDate(date)}

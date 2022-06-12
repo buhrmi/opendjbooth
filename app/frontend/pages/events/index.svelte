@@ -7,7 +7,7 @@
 
 <div class="container">
 
-  <h1>Open DJ Booth</h1>
+  <h1>Open DJ Place</h1>
 
   <h2>How to participate</h2>
 
@@ -22,7 +22,7 @@
       3. Show up and add yourself to the lineup
     </li>
     <li>
-      4. Join us on <a href="https://twitch.tv/opendjbooth" target="_blank">Twitch</a>
+      4. Join us on <a href="https://twitch.tv/opendjplace" target="_blank">Twitch</a>
     </li>
   </ol>
 
@@ -32,7 +32,7 @@
     {new Date(event.start_at).toLocaleString()}: 
     <a href="/events/{event.id}" use:inertia>{event.name}</a>
   {:else}
-    Nothing planned. Check back later or follow us on <a target="_blank" href="https://twitter.com/opendjbooth">Twitter</a>.
+    Nothing planned. Check back later or follow us on <a target="_blank" href="https://twitter.com/opendjplace">Twitter</a>.
   {/each}
 
 </div>

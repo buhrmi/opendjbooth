@@ -10,17 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_11_100310) do
-  create_table "booths", force: :cascade do |t|
-    t.string "google_place_id"
-    t.string "name"
-    t.string "timezone"
-    t.float "longitude"
-    t.float "latitude"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2022_06_12_110303) do
   create_table "djs", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -34,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_100310) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "booth_id"
+    t.integer "place_id"
   end
 
   create_table "identities", force: :cascade do |t|
@@ -48,12 +38,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_11_100310) do
     t.index ["provider", "provider_id"], name: "index_identities_on_provider_and_provider_id", unique: true
   end
 
+  create_table "places", force: :cascade do |t|
+    t.string "google_place_id"
+    t.string "name"
+    t.string "timezone"
+    t.float "longitude"
+    t.float "latitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "city_id"
+    t.integer "country_id"
+  end
+
   create_table "slots", force: :cascade do |t|
     t.integer "dj_id"
     t.datetime "start_at", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "booth_id"
+    t.integer "place_id"
     t.index ["dj_id"], name: "index_slots_on_dj_id"
   end
 

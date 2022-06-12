@@ -1,11 +1,11 @@
-class Booth < ApplicationRecord
+class Place < ApplicationRecord
   has_many :slots
   has_many :events
   has_many :djs, through: :slots
   before_save :fetch_google_place_details
 
   def broadcast_slots day
-    BoothChannel.broadcast_to(self, {slots: slots.on_day(day).as_json(include: :dj)})
+    PlaceChannel.broadcast_to(self, {slots: slots.on_day(day).as_json(include: :dj)})
   end
 
   def add_dj!(dj, time)

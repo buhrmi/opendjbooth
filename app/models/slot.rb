@@ -1,8 +1,8 @@
 class Slot < ApplicationRecord
-  belongs_to :booth
+  belongs_to :place
   belongs_to :dj
 
-  after_commit -> { booth.broadcast_slots(start_at) }
+  after_commit -> { place.broadcast_slots(start_at) }
 
   scope :on_day, -> (day) { where('start_at between ? and ?', day.beginning_of_day, day.end_of_day) }
 
