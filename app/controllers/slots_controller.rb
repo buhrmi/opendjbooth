@@ -5,7 +5,7 @@ class SlotsController < ApplicationController
     
     if meters > 1500
       flash[:error] = "You are too far away from the booth. You are #{meters.round} meters away."
-      return redirect_back(fallback_location: booth_path(booth, date: slot.start_at.strftime('%Y-%m-%d')))
+      return redirect_back(fallback_location: root_url)
     end
 
     if current_dj
@@ -20,14 +20,14 @@ class SlotsController < ApplicationController
 
     slot = booth.add_dj!(current_dj, preferred_time)
     
-    redirect_back(fallback_location: booth_path(booth, date: slot.start_at.strftime('%Y-%m-%d')))
+    redirect_back(fallback_location: root_url)
   end
 
 
   def destroy
     slot = current_dj.slots.find(params[:id])
     slot.destroy
-    redirect_back(fallback_location: booth_path(slot.booth, date: slot.start_at.strftime('%Y-%m-%d')))
+    redirect_back(fallback_location: root_url)
   end
 
   private
