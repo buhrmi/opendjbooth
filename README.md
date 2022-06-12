@@ -1,3 +1,3 @@
-# Open DJ Place
+# Open DJ Booth
 
-https://www.opendjplace.com
+https://www.opendjbooth.com
