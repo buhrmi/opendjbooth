@@ -1,6 +1,7 @@
 <script>
   export let upcoming
   export let past
+  import login from '~/lib/link_accounts'
   import { inertia } from '@inertiajs/inertia-svelte'
 
 </script>
@@ -13,16 +14,16 @@
 
   <ol>
     <li>
-      1. Prepare your USB stick with Rekordbox
+      1. Download <a href="https://rekordbox.com/download/" target="_blank">Rekordbox</a> and prepare a DJ set
     </li>
     <li>
-      2. Find an upcoming event
+      2. <a href="/session/new?provider=twitter" on:click|preventDefault={login}>Connect your Twitter account</a> (other socials coming soon)
     </li>
     <li>
-      3. Show up and add yourself to the lineup
+      3. Come to an upcoming event
     </li>
     <li>
-      4. Join us on <a href="https://twitch.tv/opendjbooth" target="_blank">Twitch</a>
+      4. Add yourself to the lineup
     </li>
   </ol>
 
@@ -36,3 +37,14 @@
   {/each}
 
 </div>
+
+<style>
+  h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+  }
+  h2 {
+    font-size: 1.5em;
+    margin: 1.0em 0 0.5em;
+  }
+</style>
